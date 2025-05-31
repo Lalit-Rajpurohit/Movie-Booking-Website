@@ -2,7 +2,7 @@
 A Movie Booking System is a digital platform that allows users to browse, select, and book movie tickets online. It streamlines the ticketing process for movie theaters and provides customers with a convenient way to plan their movie outings.
 
 ***Programing language*** 
-`Python` `html`  `css` `Javascript` `Django`
+`python` `html`  `css` `javascript` `django`
 
 ***ER***
 ![jaswantpdf-images-13](https://github.com/user-attachments/assets/f1550405-e9b6-4e7b-8373-ed62e8b79a28)
