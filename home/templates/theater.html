@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .type a{
+    margin-top: 5vh;
+}
+
+.type {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.type span {
+    background: rgb(189, 185, 185);
+    color: red;
+    padding: 0 4px;
+}
+</style>
+
+<hr>
+<div class="container mt-5">
+    <div class="container text-center">
+        <div class="row">
+             <div class="col">
+                <div class="innfo  border mt-5 d-flex" style="height: 200px; width: 100%;">
+                    <img class="mt-1 ms-5" src="/media/{{s1.movie.poster}}" alt="" style="height:190px;">
+                    <div class="nam mt-2 ms-4">
+                        <h1>{{s1.movie}}</h1>
+
+                        <div class="tags" id="type">
+                            {% for t in  s1.movie.typ.all %}
+                                
+                            <span class="badge text-bg-light"> {{t}} </span>
+                            {% endfor %}
+                          
+                        </div>
+                         <!-- <span class="badge text-bg-light">Suspense</span>
+                        <span class="badge text-bg-light">Thriller</span>  -->
+                        <br> 
+                        <span class="badge text-bg-success mt-4">Hindi</span>
+                      
+                    </div>
+                </div>
+                <div class="vide mt-3">
+                    <iframe class="border ms-5" src="{{s1.movie.tralier}}"
+                        style="height: 300px; width: 550px;"></iframe>
+                </div>
+            </div> 
+            <div class="col">
+                <div class="datess mt-3">
+                    <b style="margin-right: 320px;">Selected Date <i class="fa-solid fa-arrow-down"></i></b> <br>
+                    <div class="btn-group">
+                        <a href="" class="btn btn-outline-danger active me-2"  aria-current="page"> {{day}} </a> 
+
+                        {% for aldate in alldate %}
+
+                        <a href="{% url 'theater' s1.movie.id aldate.id %}"
+                            class="btn btn-outline-danger">{{aldate}}</a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+
+                <div class="ttb mt-1">
+                    {% for theater in theaters %}
+                    <div class="theater border p-2" style="height: 120px;">
+                        <h5>{{theater}}</h5>
+                        <p></p>
+                        <div class="timet d-flex ms-1">
+                            {% for showtime in showtimes %}
+                            {% for tt in time %}
+                            {% if tt.time == showtime.show_time.time %}
+                            {% if showtime.show_date.date == day.date %}
+                            {% if showtime.theater.name == theater.name %}
+                            <a class="btn btn-danger ms-2" href="{% url 'seat' showtime.id %}"> {{tt}} </a> <br>
+                            {% endif %}
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>
+{% endblock %}

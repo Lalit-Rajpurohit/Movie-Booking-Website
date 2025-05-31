@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<hr>
+<hr>
+
+<div class="container mt-5">
+    <h1 class="display-6">
+        All Ticket
+    </h1>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Movie</th>
+            <th scope="col">Theatre</th>
+            <th scope="col">Date</th>
+            <th scope="col">Ticket</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for booking in book  %}
+                
+       
+          <tr>
+            <th> <img src="{{booking.showtimes.movie.poster.url}}" alt="" style="height: 60px; width: 40px;">  </th>
+            <td>{{booking.showtimes.movie.title}}</td>
+            <td>{{booking.showtimes.theater.name}}</td>
+            <td>{{booking.showtimes.show_date.date}}</td>
+            <td><a href="{% url 'mail' booking.id %}">Ticket</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+{% endblock %}

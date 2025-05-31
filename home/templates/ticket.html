@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<hr>
+
+<div class="container mt-5 d-flex justify-content-center">
+
+{% include 'tt.html' %}
+
+</div>
+<div class="container">
+    <a href="{% url 'index' %}" class="btn btn-success" style="margin-left: 1000px; margin-bottom: 20px;">HOME</a>
+    <a href="{% url 'mail' booking.id  %}" class="btn btn-success" style="margin-left: 1000px; margin-bottom: 20px;">Email</a>
+    <button class="takeimg btn btn-success" style="margin-left: 1000px; margin-bottom: 20px;">Download</button>
+
+</div>
+
+
+<script src="/media/html2canvas.js"></script>
+
+<script>
+const btnn = document.querySelector('.takeimg');
+btnn.addEventListener('click',()=>{
+    html2canvas(document.querySelector('.mainbox'))
+    .then(canvas => {
+        const url = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        a.setAttribute('download','ticket.png');
+        a.setAttribute('href',url);
+        a.click();
+    })
+})
+</script>
+
+
+
+{% endblock content %}

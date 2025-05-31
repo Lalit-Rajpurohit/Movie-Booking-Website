@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+     *{
+      font-family: "Lucida Console", Courier, monospace;
+    }
+    .mm {
+      margin-left: 550px;
+    }
+
+    .icon-flipped {
+      transform: scaleX(-1);
+      -moz-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      -ms-transform: scaleX(-1);
+    }
+
+    li {
+      list-style-type: none;
+    }
+    .user{
+      height: 200px;
+      width: 200px;
+    }
+    .brx{
+      width: 850px;
+      height: 500px;
+      overflow: scroll;
+    }
+    .ulog{
+      border-radius: 50%;
+    }
+    .bm{
+      height: 100px;
+      width: 100px;
+      margin: 5px;
+    }
+    .success{
+        color: green;
+    }
+    .error{
+        color: red;
+    }
+
+    tr {
+        border: 0.1px solid black;
+
+    }
+    
+  </style>
+</head>
+
+<body >
+
+  <ul class=" me-auto mb-2 mb-lg-0 d-flex mt-3  mm">
+
+    <li class="nav-item">
+      <img src="/media/gol.png" alt="" width="55" height="44">
+    </li>
+    <li class="nav-item">
+      <img src="/media/roll.png" alt="" width="55" height="35">
+    </li>
+    <li class="nav-item">
+      <img src="/media/roll.png" alt="" width="55" height="35">
+    </li>
+    <li class="nav-item">
+      <img src="/media/cinema-screen.png" alt="" width="55" height="45">
+    </li>
+    <li class="nav-item">
+      <img src="/media/roll.png" alt="" width="55" height="35">
+    </li>
+    <li class="nav-item">
+      <img src="/media/roll.png" alt="" width="55" height="35">
+    </li>
+    <li class="nav-item icon-flipped">
+      <img src="/media/gol.png" alt="" width="55" height="44">
+    </li>
+  </ul>
+  <div>
+
+    <div class="container-sm mt-5">
+
+      <h1 class="mb-3">Filmy Duniya</h1>
+      <h5>Admin Panel </h5>
+    </div>
+<hr>
+   <div class="d-flex">
+    <div class="user border me-5 ms-5">
+      <h6 class="mt-1">Current Admin:</h6>
+
+      <img src="https://www.blenheimlettings.co.uk/wp-content/uploads/2022/09/default-imag.png" alt="" height="100" width="100" class="ulog border ms-5 mt-3">
+      <h6 class="ms-5 mt-1"> &nbsp; {{request.user}}</h6>
+
+    </div>
+
+
+
+
+    <div class="brx border   p-2 ">
+        <div class="container-sm border"><h2>Shows Active:</h2> </div>
+       
+        <div class="divtable d-flex">
+            {% for day in date  %}
+            <table class="table-primary m-2" >
+                <!-- <tr><th>---</th></tr> -->
+                <tr>
+                    <th>DAY:</th>
+                    <th>
+    {{day}}
+</th>
+</tr>
+<tr><th>---</th></tr>
+    <div class="date">
+        {% for theater in theaters  %}
+            <div class="theater">
+                <tr><th>---</th></tr>
+                <tr> <th>Theater</th> <th>
+                {{theater}} </th></tr>
+                <tr><th>---</th></tr>
+                {% for showtime in showtimes  %}
+                {% for tt in time  %}
+                    {% if tt.time == showtime.show_time.time %}
+                   
+                    {% if showtime.show_date.date == day.date %}
+                   
+                    {% if showtime.theater.name == theater.name %}
+           <tr class="trm"><td>   {{showtime.movie.title}}___ </td> <td class="tdm">at {{showtime.theater.name}} on {{showtime.show_time.time}} </td></tr>  
+                    {% endif %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            </div>
+        {% endfor %}
+    </div> <br><br> 
+{% endfor %}
+</table>
+        </div>
+
+
+    </div>
+
+
+   </div>
+
+
+
+  </div>
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

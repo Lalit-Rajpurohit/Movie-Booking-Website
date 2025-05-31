@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+body{
+    /* background-image: url("https://png.pngtree.com/png-vector/20220701/ourmid/pngtree-film-strip-cinema-strip-roll-png-image_5677570.png"); */
+    background:  url("https://th.bing.com/th/id/OIP.lgcq8gZ7rp-369wIsjgZ-AHaCp?rs=1&pid=ImgDetMain") no-repeat fixed   center;
+    background-size: contain;
+}
+
+input[type="checkbox"]{
+    height: 2rem;
+    width: 2rem;
+}
+
+</style>
+
+
+<hr>
+<div class="container mt-5">
+    <div class="innfo  border  ps-2 " style="height: 130px; width: 40%; margin-left: 550px; margin-top: 70px; background-color: white;">
+        <h4>Movie: <i class="fa-solid fa-clapperboard"></i> {{showtime.movie.title}}</h4>
+        <h5>Theatet: <i class="fa-solid fa-masks-theater"></i> {{showtime.theater.name}}</h5>
+        <h6>Date: <i class="fa-solid fa-calendar-days"></i> {{showtime.show_date}}</h6>
+        <h6>Time: <i class="fa-solid fa-clock"></i> {{showtime.show_time}}</h6>
+  </div>
+
+  <div class="sel  mt-2"  style="margin-left: 400px ; width: 40%; background-color: white;">
+
+    <div class="in mt-2 ms-5">
+       Avialable
+        <input type="checkbox" name="aut" value="" />
+       
+        Selected
+        <input type="checkbox" name="aut" value="" checked />
+        Sold
+        <input type="checkbox"  disabled  checked name="aut" value="" />
+     
+    </div>
+    <h6 class="ms-5"> <b> ₹{{showtime.seatprice}} </b><small>per seat</small></h6>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="seat border p-3  " style="height: 450px; width: 390px;  margin-left: 50px;">
+            {% for s in seat %}
+            {% if s.is_available == True %}
+            <!-- <label class="">  </label> -->
+            <input id="rt" type="checkbox" name="sb" value="{{s.id}}" />
+       
+            {% else %}
+            <!-- <label class="">  </label> -->
+            <input id="rt" type="checkbox" name="ci" disabled  checked />
+    
+            {% endif %}
+            {% endfor %}
+            <div class="dd">
+                <br>
+            <input class="btn btn-outline-danger" type="submit" value="Book">
+        </div>
+        </div>
+    </form>
+  </div>
+
+</div>
+
+<script>
+    rt = document.querySelectorAll("#rt")
+
+    for(var i=0;i<10;i++){
+        rt[i].style.marginBottom = "30px";
+    }
+    rt[11].style.marginRight = "2rem";
+    rt[16].style.marginLeft = "2rem";
+    rt[19].style.marginRight = "2rem";
+    rt[24].style.marginLeft = "2rem";
+    rt[27].style.marginRight = "2rem";
+    rt[32].style.marginLeft = "2rem";
+
+    for(var i=26;i<34;i++){
+        rt[i].style.marginBottom = "30px";
+    }
+
+    rt[34].style.marginLeft = "4.2rem";
+    // rt[39].style.marginRight = "2rem";
+
+    rt[40].style.marginLeft = "4.2rem";
+    // rt[45].style.marginRight = "6rem";
+
+    rt[46].style.marginLeft = "4.2rem";
+    // rt[51].style.marginRight = "6rem";
+
+    rt[52].style.marginLeft = "4.2rem";
+    // rt[57].style.marginRight = "6rem";
+
+</script>
+{% endblock content%}

@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<style>
+    /* .panel-title {display: inline;font-weight: bold;} */
+/* .checkbox.pull-right { margin: 0; } */
+/* .pl-ziro { padding-left: 0px; } */
+.re{
+    font-size: x-small;
+}
+</style>
+<hr>
+<hr>
+<hr>
+<div class="container mt-5">
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col mt-5">
+                <div class="detial">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/media/{{details.movie.poster}}" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title"> <i class="fa-solid fa-clapperboard fa-lg"></i> {{details.movie.title}}</h5>
+                                    <h5 class="card-title"> <i class="fa-solid fa-tv fa-lg"></i> {{details.theater.name}}</h5>
+                                    <p class="card-text"><i class="fa-regular fa-calendar-days fa-lg"></i> {{details.show_date.date}}</p>
+                                    <p class="card-text"> <i class="fa-regular fa-clock fa-lg"></i> {{details.show_time.time}}</p>
+                                    <p class="card-text"> <small>{{details.theater.address}}</small> </p>
+                                    <p class="card-text"><small class="text-body-secondary"></small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mt-5 d-flex">
+                <div class="payinfo border d-flex me-4" style="width: 280px; height: 220px;">
+                    <div class="dd p-3">
+                        <b>TotalxSeat</b><br>
+                        <b>Seat No.</b><br>
+                        <b>Movie</b><br> <br>
+                        <!-- <b>Tax</b> -->
+                        <!-- <br> <br> -->
+                        <hr>
+                      
+                        <b>Total</b>
+                    </div>
+                    <div class="dd p-3">
+                        <b>{{c}}</b><br>
+                        <small>
+                            {% for seat in bookseat   %}
+                                {{seat.seat_number}}
+                            {% endfor %}
+                        </small> <br>
+                        <b>₹{{price}}</b><br>
+                        <small class="re">{{c}}*110</small><br>
+                        <!-- <b>₹{{tax}}</b><br> -->
+                      <!-- <small class="re">{{c}}*12</small> -->
+                        <hr>
+                        <b>₹{{total}}</b>
+                    </div>
+                </div>
+                <div class="row border" style="width: 100%;">
+                    <div class="col-xs-12 col-md-5 mt-2" style="width: 80%;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">
+                                    Payment Details
+                                </h3>
+                                <div class="checkbox">
+                                    <!-- <label>
+                                        <input type="checkbox" />
+                                        Remember
+                                    </label> -->
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                               
+                                    <form role="form" action="{% url 'book' %}" method="post">
+                                        {% csrf_token %}
+                                    <div class="form-group m-4">
+                                        <label for="cardNumber" style="margin-left: -180px;">
+                                            CARD HOLDER NAME</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="cardNumber" placeholder="Valid Card holder Name"
+                                                required autofocus />
+                                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                        </div>
+                                    </div>
+                                <div class="form-group m-4">
+                                    <label for="cardNumber" style="margin-left: -230px;">
+                                        CARD NUMBER</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="cardNumber"  placeholder="Valid Card Number"
+                                            required autofocus />
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-7 col-md-7">
+                                        <div class="form-group m-2">
+                                            <label for="expityMonth" style="margin-left: -100px;">
+                                                EXPIRY DATE</label>
+                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                            </div>
+                                            <div class="col-xs-6 col-lg-6 pl-ziro">
+                                                <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5 col-md-5 pull-right">
+                                        <div class="form-group m-2">
+                                            <label for="cvCode">
+                                                CV CODE</label>
+                                            <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                            </div>
+                        </div>
+                        <ul class="nav nav-pills nav-stacked">
+                            <!-- <li class="active"><a href="#"><span class="badge pull-right"><span class="glyphicon glyphicon-usd"></span>4200</span> Final Payment</a> -->
+                            </li>
+                        </ul>
+                        <br/>
+                     
+                            {% for bs in bookseat %}
+                            <input type="text" id="tt" name="sb" value="{{bs.id}}">
+                            <input type="text" id="tt" name="total" value="{{total}}">
+                            {% endfor %}
+                            <input type="submit" class="btn btn-danger" value="Pay">
+                        </form> 
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- {{bookseat}}
+{{details.theater.name}}
+{{details.movie.title}}
+{{details.show_date.date}}
+{{details.show_time.time}}
+<br>
+{% for sb in bookseat %}
+{{ sb.seat_number }}
+{% endfor %}
+{{total}} -->
+<!-- <form action="{% url 'book' %}" method="post">
+    {% csrf_token %}
+    {% for bs in bookseat %}
+    <input type="text" id="tt" name="sb" value="{{bs.id}}">
+    <input type="text" id="tt" name="total" value="{{total}}">
+    {% endfor %}
+    <input type="submit" value="BOOK">
+</form>  -->
+
+
+
+<style>
+    #tt {
+        display: none;
+    }
+</style>
+
+
+{% endblock %}

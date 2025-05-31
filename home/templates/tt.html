@@ -1,0 +1,39 @@
+{% load static %}
+<div class="mainbox card mb-3 align-self-center shadow" style="max-width: 640px; margin-top: 20vh;">
+    <div class="row g-0" style="width: 800px;">
+        <div class="col-md-4">
+            <img src="{{booking.showtimes.movie.poster.url}}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8 d-flex" style="width: 500px;">
+            <div class="card-body " style="width: 840px;">
+                <h5 class="card-title"> <i class="fa-solid fa-clapperboard fa-lg"></i> {{booking.showtimes.movie.title}}</h5>
+                <h5 class="card-title"> <i class="fa-solid fa-tv fa-lg"></i> {{booking.showtimes.theater.name}}</h5>
+                <p class="card-text"><i class="fa-regular fa-calendar-days fa-lg"></i> {{booking.showtimes.show_date.date}}
+                </p>
+                <p class="card-text"> <i class="fa-regular fa-clock fa-lg"></i> {{booking.showtimes.show_time.time}}</p>
+                <p class="card-text"> <i class="fa-solid fa-couch fg-lg"></i>
+                    Seat No.
+                    {% for s in booking.seats.all %}
+                    <b> {{s.seat_number}} </b>
+                    {% endfor %}
+                </p>
+                <p class="card-text"><i class="fa-solid fa-location-dot fa-lg"></i>
+                    <small>{{booking.showtimes.theater.address}}</small>
+                </p>
+                <p class="card-text"> <small> <i class="fa-solid fa-phone fa-lg"></i>
+                        {{booking.showtimes.theater.contact_number}}</small> </p>
+                <p class="card-text"><small class="text-body-secondary"></small></p>
+            </div>
+            
+            <div class="tox">
+            <img src="/media/{{booking.id}}.jpg" style="height: 200px; margin-right: 135px;" width="200px" alt="">
+                 <div class="trr ms-5">         
+    <h6 ><b>Id</b>:{{booking.BID}}</h6>
+    <h6><b>No.</b>:{{booking.BNO}}</h6>
+    <h6><b>Screen</b>:{{booking.showtimes.screen}}</h6>
+</div> 
+</div>
+        </div>
+    </div>
+
+</div>
