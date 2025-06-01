@@ -179,7 +179,7 @@ def mail(request,id):
     msg = EmailMultiAlternatives(
     subject="Ticket",
     body=plain_message,
-    from_email= "gamerzer425@gmail.com",
+    from_email= "your_email",
   to=  [user.email],
     )
     
@@ -195,6 +195,4 @@ def mail(request,id):
     return render(request,"ticket.html",context)
 
 
-# message.attach("design.png", img_data, "image/png")
-# to=  ["rajpurohitlalit181@gmail.com"],
 
